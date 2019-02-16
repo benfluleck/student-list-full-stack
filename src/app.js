@@ -4,8 +4,8 @@ import { makeExecutableSchema } from 'graphql-tools'
 import { mergeTypes } from 'merge-graphql-schemas'
 import dotenv from 'dotenv'
 
+import db from './models'
 import { typeDefs, resolvers } from './graphql'
-
 
 (async () => {
   try {
@@ -24,8 +24,10 @@ import { typeDefs, resolvers } from './graphql'
     })
 
     await server.applyMiddleware({ app, cors: false })
+    await db.sequelize.authenticate()
 
-    app.listen({ port }, () => {
+    app.listen({ port }, async () => {
+      await db.sequelize.sync()
       console.log(`Server started http://localhost:${port}${server.graphqlPath}`)
     })
   } catch (error) {
