@@ -1,16 +1,35 @@
-const db = {
-  students: [
-    { id: '1', firstname: 'Alex', lastname: 'Jones', birthdate: Date.now(), photorUrl: 'https://gravatar.com/...', hobbyIds: ['1', '2'] },
-    { id: '2', firstname: 'Benny', lastname: 'Jones', birthdate: Date.now(), photorUrl: 'https://gravatar.com/...', hobbyIds: ['1', '3'] },
-    { id: '3', firstname: 'Sam', lastname: 'Jones', birthdate: Date.now(), photorUrl: 'https://gravatar.com/...', hobbyIds: ['3', '4'] },
-    { id: '4', firstname: 'Kabert', lastname: 'Jones', birthdate: Date.now(), photorUrl: 'https://gravatar.com/...', hobbyIds: ['3', '1'] }
-  ],
-  hobbies: [
-    { id: '1', hobby: 'Basketball' },
-    { id: '2', hobby: 'Football' },
-    { id: '3', hobby: 'Netball' },
-    { id: '4', hobby: 'Swimming' }
-  ]
-}
+import fs from 'fs'
+import path from 'path'
+import Sequelize from 'sequelize'
+import configuration from '../configs'
+
+const basename = path.basename(__filename)
+const env = process.env.NODE_ENV || 'development'
+const config = configuration[env]
+const db = {}
+
+const configPath = env === 'test' ? config : config.url
+
+const sequelize = new Sequelize(configPath)
+
+fs.readdirSync(__dirname)
+  .filter(file => {
+    return (
+      file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js'
+    )
+  })
+  .forEach(file => {
+    const model = sequelize['import'](path.join(__dirname, file))
+    db[model.name] = model
+  })
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db)
+  }
+})
+
+db.sequelize = sequelize
+db.Sequelize = Sequelize
 
 export default db
