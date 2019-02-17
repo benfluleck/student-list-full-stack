@@ -10,12 +10,12 @@
     "lint:fix": "prettier-eslint '**/*js' --write",
     "start:dev": "nodemon src/app.js --exec babel-node",
     "start": "npm run build && node dist/app.js",
-    "test": "NODE_ENV=test npm run build && mocha src/tests/index.test.js  --timeout 8000 --require @babel/register  --exit",
     "build:client-dev": "rm -rf client/dist && webpack --env.mode development",
     "build:client-prod": "rm -rf client/dist && webpack --env.mode production",
     "client:dev": "rm -rf client/dist && webpack-dev-server --env.mode development --open --hot",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build"
+    "styleguide:build": "styleguidist build",
+    "test": "NODE_ENV=test && jest"
   },
   "husky": {
     "hooks": {
@@ -29,6 +29,7 @@
     ]
   },
   "devDependencies": {
+    "babel-jest": "^24.1.0",
     "dotenv": "^6.2.0",
     "eslint": "^5.14.1",
     "eslint-config-standard": "^12.0.0",
@@ -39,6 +40,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "express": "^4.16.4",
     "husky": "^1.3.1",
+    "jest": "^24.1.0",
     "lint-staged": "^8.1.4",
     "nodemon": "^1.18.10",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
