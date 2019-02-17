@@ -2,15 +2,16 @@ import { UserInputError } from 'apollo-server-core'
 import Joi from 'joi'
 
 import models from '../../models'
-import { validateStudentFields } from '../../validationSchemas'
+import { validateStudentFields, validateId } from '../../validationSchemas'
 
 const { Student, Hobbies } = models
 
 const students = {
   Query: {
     getAllStudents: () => Student.findAll({}),
-    getStudent: (root, { id }) => {
+    getStudent: async (root, { id }) => {
       try {
+        await Joi.validate(id, validateId, { abortEarly: false })
         return Student.findByPk(id)
       } catch (error) {
         throw new UserInputError('This student is not present')
@@ -44,6 +45,7 @@ const students = {
     },
     editStudent: async (root, { id, firstname, lastname, birthdate, photoUrl, hobbies }) => {
       try {
+        await Joi.validate(id, validateId, { abortEarly: false })
         const student = await Student.findByPk(id)
         const foundStudent = {
           firstname: student.firstname,

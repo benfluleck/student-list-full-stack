@@ -6,11 +6,10 @@ import configuration from '../configs'
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
 const config = configuration[env]
+
 const db = {}
 
-const configPath = env === 'test' ? config : config.url
-
-const sequelize = new Sequelize(configPath)
+const sequelize = new Sequelize(config)
 
 fs.readdirSync(__dirname)
   .filter(file => {
