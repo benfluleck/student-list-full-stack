@@ -19,8 +19,7 @@ import { typeDefs, resolvers } from './graphql'
     app.disable('x-powered-by')
 
     const server = new ApolloServer({
-      schema,
-      context: ({ req, res }) => ({ req, res })
+      schema
     })
 
     await server.applyMiddleware({ app, cors: false })

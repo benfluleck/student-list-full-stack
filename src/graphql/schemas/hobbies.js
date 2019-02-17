@@ -4,14 +4,16 @@ const hobbies =
   gql`
   type Hobbies {
     id: ID!
-    hobby: String!
+    name: String!
   }
   extend type Query {
     getHobby(id: ID!): Hobbies!
     getAllHobbies: [Hobbies!]!
   }
   extend type Mutation {
-    addHobby(hobby: String!): Hobbies!
+    addHobby(name: String!): Hobbies!
+    editHobby(id: ID!,  name: String!): Hobbies!
+    deleteHobby(id: ID!): ID!
   }
 `
 

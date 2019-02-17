@@ -3,8 +3,7 @@ export default (sequelize, Sequelize) => {
     id: {
       type: Sequelize.UUID,
       defaultValue: Sequelize.UUIDV4,
-      primaryKey: true,
-      unique: true
+      primaryKey: true
     },
     firstname: {
       type: Sequelize.STRING,
@@ -36,6 +35,11 @@ export default (sequelize, Sequelize) => {
       as: 'student',
       through: models.StudentHobbies,
       foreignKey: 'studentId'
+    })
+
+    Student.hasMany(models.Hobbies, {
+      as: 'hobby',
+      foreignKey: 'hobbies'
     })
   }
 
