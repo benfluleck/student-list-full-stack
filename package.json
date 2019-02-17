@@ -8,7 +8,7 @@
     "build": "babel src --out-dir dist",
     "lint": "eslint '**/*js'",
     "lint:fix": "prettier-eslint '**/*js' --write",
-    "start:dev": "npm run build && nodemon dist/app.js",
+    "start:dev": "nodemon src/app.js --exec babel-node",
     "start": "npm run build && node dist/app.js",
     "test": "NODE_ENV=test npm run build && mocha src/tests/index.test.js  --timeout 8000 --require @babel/register  --exit"
   },
@@ -48,12 +48,12 @@
     "@babel/register": "^7.0.0",
     "apollo-server-express": "^2.4.2",
     "babel-preset-minify": "^0.5.0",
+    "joi": "^14.3.1",
     "lodash.merge": "^4.6.1",
     "merge-graphql-schemas": "^1.5.8",
     "pg": "^7.8.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.42.0",
-    "sqlite3": "^4.0.6",
-    "uniqid": "^5.0.3"
+    "sqlite3": "^4.0.6"
   }
 }

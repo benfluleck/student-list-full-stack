@@ -18,7 +18,9 @@ const student =
     getAllStudents: [Student!]!
   }
   extend type Mutation {
-    addStudent(firstName: String!, lastName: String!, birthDate: Date!, photoUrl: String!, hobbies: [ID!]!): Student!
+    addStudent(firstname: String!, lastname: String!, birthdate: Date!, photoUrl: String!, hobbies: [ID!]!): Student!
+    editStudent(id: ID!, firstname: String, lastname: String, birthdate: Date, photoUrl: String, hobbies: [ID!]): Student!
+    deleteStudent(id: ID!): ID!
   }
 `
 
