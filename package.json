@@ -13,7 +13,9 @@
     "test": "NODE_ENV=test npm run build && mocha src/tests/index.test.js  --timeout 8000 --require @babel/register  --exit",
     "build:client-dev": "rm -rf client/dist && webpack --env.mode development",
     "build:client-prod": "rm -rf client/dist && webpack --env.mode production",
-    "client:dev": "rm -rf client/dist && webpack-dev-server --env.mode development --open --hot"
+    "client:dev": "rm -rf client/dist && webpack-dev-server --env.mode development --open --hot",
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build"
   },
   "husky": {
     "hooks": {
@@ -42,6 +44,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier-eslint": "^8.8.2",
     "prettier-eslint-cli": "^4.7.1",
+    "react-styleguidist": "^8.0.6",
     "uglifyjs-webpack-plugin": "^2.1.1",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.1.14"

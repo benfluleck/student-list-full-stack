@@ -1,5 +1,6 @@
 import React from 'react'
+import Text from '<atoms>/Text/Text'
 
-const HomePage = () => (<h1>Hello World</h1>)
+const HomePage = () => (<Text>Hello World</Text>)
 
 export default HomePage

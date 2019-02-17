@@ -10,7 +10,11 @@ module.exports = {
     filename: '[name].chunk.js'
   },
   resolve: {
-    extensions: ['.jsx', '.js']
+    extensions: ['.jsx', '.js'],
+    alias: {
+      '<atoms>': path.resolve(__dirname, 'client/src/components/UI/atoms'),
+      '<styles>': path.resolve(__dirname, 'client/src/styles')
+    }
   },
   plugins: [
     new webpack.ProgressPlugin(),
