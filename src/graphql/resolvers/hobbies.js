@@ -36,7 +36,7 @@ const hobbies = {
       await Joi.validate({ id }, validateId, { abortEarly: false })
       const foundHobby = await Hobbies.findByPk(id)
       if (!foundHobby) {
-        throw new UserInputError('This hobby is not found')
+        throw new UserInputError('This hobby was not found')
       }
       await Hobbies.destroy({ where: { id } })
       return id
@@ -45,7 +45,7 @@ const hobbies = {
       await Joi.validate({ id, name }, validateHobby, { abortEarly: false })
       const foundHobby = await Hobbies.findByPk(id)
       if (!foundHobby) {
-        throw new UserInputError('This hobby is not found')
+        throw new UserInputError('This hobby was not found')
       }
       const hobby = await Hobbies.findByPk(id)
       const updatedHobby = await hobby.updateAttributes({ name })

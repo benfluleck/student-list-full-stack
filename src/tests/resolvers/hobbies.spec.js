@@ -9,23 +9,103 @@ const addHobbyMutation = `
     }
 }`
 
+const deleteHobbyMutation = `
+  mutation DeleteHobbyMutation($id: ID!){
+    deleteHobby(id: $id)
+}`
+
+const editedHobbyMutation = `
+  mutation DeleteHobbyMutation($id: ID!, $name: String!){
+    editHobby(id: $id, name: $name){
+      id
+      name
+    }
+}`
+
 beforeAll(async () => {
-  await db.sequelize.authenticate()
   await db.sequelize.sync({ force: true })
-})
+}, 9000)
 
-afterAll(async () => {
-  await db.sequelize.close()
-})
+let currentHobbyId
 
-describe('Resolvers', () => {
-  it('Add Hobby', async () => {
+describe('Hobby Resolver', () => {
+  describe('Add Hobby Mutation', () => {
     const testHobby = { name: 'TestHobby' }
 
-    const addHobbyResponse = await graphqlTestCall(addHobbyMutation, {
-      name: testHobby.name
+    it('should succesfully return an added Hobby', async () => {
+      const addHobbyResponse = await graphqlTestCall(addHobbyMutation, {
+        name: testHobby.name
+      })
+
+      currentHobbyId = addHobbyResponse.data.addHobby.id
+      expect(addHobbyResponse.data.addHobby.name).toEqual('TestHobby')
     })
 
-    console.log(process.env.NODE_ENV, '>>enc', addHobbyResponse, '>>>>> response')
+    it('should return an error when adding the same hobby', async () => {
+      const secondHobbyResponse = await graphqlTestCall(addHobbyMutation, {
+        name: testHobby.name
+      })
+
+      expect(secondHobbyResponse.errors[0].message).toEqual('This hobby is already present')
+    })
+
+    it('should return a validation error when adding the same hobby', async () => {
+      const noHobbyResponse = await graphqlTestCall(addHobbyMutation, {
+        name: ''
+      })
+
+      expect(noHobbyResponse.errors[0].message).toEqual('child "Name" fails because ["Name" is not allowed to be empty]')
+    })
+  })
+
+  describe('Edit Hobby Mutation', () => {
+    it('should succesfully return an added Hobby', async () => {
+      const editedHobbyResponse = await graphqlTestCall(editedHobbyMutation, {
+        id: currentHobbyId,
+        name: 'Oshe Hobby'
+      })
+
+      expect(editedHobbyResponse.data.editHobby.name).toEqual('Oshe Hobby')
+      expect(editedHobbyResponse.data.editHobby.id).toEqual(currentHobbyId)
+    })
+
+    it('should return an error for a hobby not id the database', async () => {
+      const editedHobbyResponse = await graphqlTestCall(editedHobbyMutation, {
+        id: 'c4a9c69b-326f-4ea3-bba3-858e91f13098',
+        name: 'Oshe Hobby'
+      })
+      expect(editedHobbyResponse.errors[0].message).toEqual('This hobby was not found')
+    })
+
+    it('should return an error for an invalid id', async () => {
+      const editedHobbyResponse = await graphqlTestCall(editedHobbyMutation, {
+        id: 'dfdfddf',
+        name: 'Oshe Hobby'
+      })
+      expect(editedHobbyResponse.errors[0].message).toEqual('child "Id" fails because ["Id" must be a valid GUID]')
+    })
+  })
+
+  describe('Delete Hobby Mutation', () => {
+    it('should sucessfully delete a hobby', async () => {
+      const deleteHobbyResponse = await graphqlTestCall(deleteHobbyMutation, {
+        id: currentHobbyId
+      })
+      expect(deleteHobbyResponse.data.deleteHobby).toEqual(currentHobbyId)
+    })
+
+    it('should return an error for an already hobby', async () => {
+      const deleteHobbyResponse = await graphqlTestCall(deleteHobbyMutation, {
+        id: currentHobbyId
+      })
+      expect(deleteHobbyResponse.errors[0].message).toEqual('This hobby was not found')
+    })
+
+    it('should return an error for an invalid id', async () => {
+      const deleteHobbyResponse = await graphqlTestCall(deleteHobbyMutation, {
+        id: 'eerere'
+      })
+      expect(deleteHobbyResponse.errors[0].message).toEqual('child "Id" fails because ["Id" must be a valid GUID]')
+    })
   })
 })
