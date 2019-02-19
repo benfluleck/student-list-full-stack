@@ -9,7 +9,9 @@ const config = configuration[env]
 
 const db = {}
 
-const sequelize = new Sequelize(config)
+const configPath = env === 'test' ? config : config.url
+
+const sequelize = new Sequelize(configPath)
 
 fs.readdirSync(__dirname)
   .filter(file => {

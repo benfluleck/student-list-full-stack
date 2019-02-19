@@ -15,7 +15,7 @@
     "client:dev": "rm -rf client/dist && webpack-dev-server --env.mode development --open --hot",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "test": "NODE_ENV=test && jest"
+    "server:test": "NODE_ENV=test && jest src/tests/index.spec.js "
   },
   "husky": {
     "hooks": {

@@ -45,7 +45,7 @@ const students = {
     },
     editStudent: async (root, { id, firstname, lastname, birthdate, photoUrl, hobbies }) => {
       try {
-        await Joi.validate(id, validateId, { abortEarly: false })
+        await Joi.validate({ id }, validateId, { abortEarly: false })
         const student = await Student.findByPk(id)
         const foundStudent = {
           firstname: student.firstname,

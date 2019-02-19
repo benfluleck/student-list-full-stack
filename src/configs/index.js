@@ -9,12 +9,11 @@ const config = {
     operatorsAliases: false
   },
   test: {
-    url: process.env.TEST_DATABASE_URL,
     dialect: process.env.TEST_DIALECT,
-    host: 'babar.elephantsql.com',
-    database: 'ikhtwtns',
-    password: 'YulrRTsbCC8KD8LbmbaqYwXibWoJtcL7',
-    username: 'ikhtwtns'
+    host: process.env.TEST_HOST,
+    database: process.env.TEST_DATABASE,
+    password: process.env.TEST_PASSWORD,
+    username: process.env.TEST_USER
   },
   production: {
     url: process.env.PROD_DATABASE_URL,
