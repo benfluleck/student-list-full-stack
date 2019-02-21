@@ -13,7 +13,8 @@ export const textColors = {
   lightGrey: '#CDCDCD',
   red: '#E50000',
   white: '#FFFFFF',
-  primary: '#0F2944'
+  primary: '#0F2944',
+  orange: '#E79E19'
 }
 
 export const backgroundColors = {

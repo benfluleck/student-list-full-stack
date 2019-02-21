@@ -15,5 +15,5 @@ export const spacing = {
   xl: '6.4rem',
   xlPlusBase: '7.2rem',
   xxxl: '8.8rem',
-  cards: '20rem'
+  cards: '25rem'
 }

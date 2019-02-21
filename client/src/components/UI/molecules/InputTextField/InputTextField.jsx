@@ -21,24 +21,31 @@ import Text from '<atoms>/Text/Text'
 const InputTextField = ({
   value,
   placeholder,
+  fieldName,
   onChange,
   errorMessage,
   showError
 }) => {
   return (
-    <InputTextField.InnerContainer>
-      <TextInput
-        placeholder={placeholder}
-        value={value}
-        isError={showError && errorMessage !== null}
-        onChange={onChange} />
-      {showError && errorMessage && <Text color="red" fontSize="sm" padding="xxs" >{errorMessage}</Text>}
-    </InputTextField.InnerContainer>
+    <InputTextField.Conntainer>
+      <Text fontSize="base">
+        {fieldName}
+      </Text>
+      <InputTextField.InnerContainer>
+        <TextInput
+          placeholder={placeholder}
+          value={value}
+          isError={showError && errorMessage !== null}
+          onChange={onChange}/>
+        {showError && errorMessage && <Text color="red" fontSize="sm" padding="xxs" >{errorMessage}</Text>}
+      </InputTextField.InnerContainer>
+    </InputTextField.Conntainer>
   )
 }
 
 InputTextField.propTypes = {
   placeholder: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  fieldName: PropTypes.string,
   value: PropTypes.string,
   errorMessage: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   showError: PropTypes.bool,
@@ -52,6 +59,12 @@ InputTextField.defaultProps = {
 InputTextField.InnerContainer = styled.div`
   display: flex;
   flex-flow: column wrap;
+  width: 80%;
+`
+InputTextField.Conntainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `
 
 export default InputTextField

@@ -3,7 +3,9 @@ module.exports = {
     historyApiFallback: true,
     port: 8000,
     proxy: {
-      '*': 'http://localhost:4000'
+      '*': 'http://localhost:4000',
+      'secure': false,
+      'changeOrigin': true
     }
   }
 }
