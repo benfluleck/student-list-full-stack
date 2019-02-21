@@ -39,6 +39,8 @@ class HomePage extends React.Component {
             {({ data, loading }) => {
               if (loading) {
                 return <div>Loading ...</div>
+              } if (!loading && !data) {
+                return <h2>No Students present</h2>
               }
               const { getAllStudents: studentCards } = data
               return <StudentCardList studentCards={studentCards} />
