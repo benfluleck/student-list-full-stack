@@ -1,0 +1,13 @@
+{
+  getAllStudents{
+    id
+    firstname
+    lastname
+    birthdate
+    photoUrl
+    hobbies{
+      id
+      name
+    }
+  }
+}

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import { spacing } from '<styles>/variables/spacing'
+import { buttonColors, textColors } from '<styles>/variables/colorPalette'
 
 /**
  * @description - Button Component
@@ -12,12 +13,14 @@ import { spacing } from '<styles>/variables/spacing'
  *
  * Button Component
  */
-const Button = ({ disabled, onClick, children, padding, borderRadius }) => (
+const Button = ({ disabled, onClick, children, padding, borderRadius, color, backgroundColor }) => (
   <Button.Container
     padding={padding}
     onClick={onClick}
     disabled={disabled}
     borderRadius={borderRadius}
+    backgroundColor={backgroundColor}
+    color={color}
   >
     {children}
   </Button.Container>
@@ -28,8 +31,9 @@ Button.Container = styled.button`
   font-size: ${props => props.theme.fontSize.sm};
   padding: ${props => props.theme.spacing[props.padding]};
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
-  background: ${props => props.theme.buttonColors.primary};
-  color: ${props => props.theme.buttonColors.white};
+  background: ${props => props.theme.buttonColors[props.backgroundColor]};
+  color: ${props => props.theme.textColors[props.color]};
+  border: 1px solid ${props => props.theme.buttonColors.primary};
   border-radius: ${props => props.theme.spacing[props.borderRadius]};
 
   &:hover {
@@ -60,13 +64,17 @@ Button.propTypes = {
   borderRadius: PropTypes.oneOf(Object.keys(spacing)),
   onClick: PropTypes.func,
   disabled: PropTypes.bool,
-  children: PropTypes.string.isRequired
+  children: PropTypes.string.isRequired,
+  backgroundColor: PropTypes.oneOf(Object.keys(buttonColors)),
+  color: PropTypes.oneOf(Object.keys(textColors))
 }
 
 Button.defaultProps = {
   disabled: false,
   padding: 'basePlusXs',
-  borderRadius: 'xs'
+  borderRadius: 'xs',
+  backgroundColor: 'primary',
+  color: 'white'
 }
 
 export default Button

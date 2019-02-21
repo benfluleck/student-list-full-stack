@@ -22,7 +22,7 @@ import { typeDefs, resolvers } from './graphql'
       schema
     })
 
-    await server.applyMiddleware({ app, cors: false })
+    await server.applyMiddleware({ app, cors: true })
     await db.sequelize.authenticate()
 
     app.listen({ port }, async () => {

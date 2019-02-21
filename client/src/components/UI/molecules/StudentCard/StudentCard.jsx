@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 import Text from '<atoms>/Text/Text'
 import Image from '<atoms>/Image/Image'
+import { getDate } from '<helpers>/helpers'
 
 /**
  * @description - StudentCard component
@@ -36,7 +37,7 @@ function StudentCard ({ firstname, lastname, birthdate, photoUrl, altText, hobbi
       </StudentCard.Content>
       <StudentCard.Footer>
         <Text fontSize="xs" color="lightGrey">Birthday: </Text>
-        <Text fontSize="xs" color="lightGrey">{birthdate}</Text>
+        <Text fontSize="xs" color="lightGrey">{getDate(birthdate)}</Text>
       </StudentCard.Footer>
     </StudentCard.Container>
   )
@@ -90,7 +91,7 @@ StudentCard.propTypes = {
   firstname: PropTypes.string,
   altText: PropTypes.string,
   lastname: PropTypes.string,
-  birthdate: PropTypes.string,
+  birthdate: PropTypes.number,
   photoUrl: PropTypes.string,
   hobbies: PropTypes.arrayOf(
     PropTypes.shape({

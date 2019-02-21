@@ -13,7 +13,12 @@ module.exports = {
     extensions: ['.jsx', '.js'],
     alias: {
       '<atoms>': path.resolve(__dirname, 'client/src/components/UI/atoms'),
-      '<styles>': path.resolve(__dirname, 'client/src/styles')
+      '<molecules>': path.resolve(__dirname, 'client/src/components/UI/molecules'),
+      '<organisms>': path.resolve(__dirname, 'client/src/components/UI/organisms'),
+      '<styles>': path.resolve(__dirname, 'client/src/styles'),
+      '<core>': path.resolve(__dirname, 'client/src/core'),
+      '<helpers>': path.resolve(__dirname, 'client/src/helpers'),
+      '<graphql>': path.resolve(__dirname, 'client/src/graphQL')
     }
   },
   plugins: [
@@ -42,6 +47,11 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
+      },
+      {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader'
       }
     ]
   }
