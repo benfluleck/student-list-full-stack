@@ -15,7 +15,7 @@ This is a full stack application that allows inidivduals to manage their student
 - [Support or Contribution](#support-or-contribution)
 
 ## Getting Started
-This is a fullstack javascript application built with [**Node JS**](https://nodejs.org/en/) using [**Express**](https://expressjs.com/) framework and [**Apollo GraphQL Server**](https://www.apollographql.com/) on the backend. The frot is built in React JS with Apollo Client fetching the data from the backend. The backend application can be built with Docker
+This is a fullstack javascript application built with [**Node JS**](https://nodejs.org/en/) using [**Express**](https://expressjs.com/) framework and [**Apollo GraphQL Server**](https://www.apollographql.com/) on the backend. The frontEnd is built with React JS with the aid of Apollo Client fetching the data from the backend. The backend application can be built with Docker
 
 
 ## Technology Stack
@@ -57,7 +57,7 @@ Open an .env file in the .docker folder to pass your environment variables to Do
 - To build the application and run docker
 `docker-compose up --build`
 
-- This will help to build the application, setup the databse and seed it.
+- This will help to build the application, setup the migration with Sequelize.
 
 ### For Client
 **Development**
