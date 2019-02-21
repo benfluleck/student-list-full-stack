@@ -1,8 +1,7 @@
 # Student Skill Cards List
 
-This is a full stack application that allows inidivduals to manage their student's lis
+This is a full stack application that allows inidivduals to manage their students list
 
-<img width="1440" alt="GraphQL schemas" src="./screenshots/image1.png">
 <img width="1440" alt="Client Side" src="./screenshots/image2.png">
 
 
@@ -41,7 +40,7 @@ This is a fullstack javascript application built with [**Node JS**](https://node
 **_Different Build Environments_**
 
 
-## For Server
+### For Server
 **Development**
 ```
 yarn server:dev
@@ -60,7 +59,7 @@ Open an .env file in the .docker folder to pass your environment variables to Do
 
 - This will help to build the application, setup the databse and seed it.
 
-## For Client
+### For Client
 **Development**
 ```
 yarn client:dev
