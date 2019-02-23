@@ -48,14 +48,6 @@ describe('Hobby Resolver', () => {
 
       expect(secondHobbyResponse.errors[0].message).toEqual('This hobby is already present')
     })
-
-    it('should return a validation error when adding the same hobby', async () => {
-      const noHobbyResponse = await graphqlTestCall(addHobbyMutation, {
-        name: ''
-      })
-
-      expect(noHobbyResponse.errors[0].message).toEqual('child "Name" fails because ["Name" is not allowed to be empty]')
-    })
   })
 
   describe('Edit Hobby Mutation', () => {
@@ -82,7 +74,7 @@ describe('Hobby Resolver', () => {
         id: 'dfdfddf',
         name: 'Oshe Hobby'
       })
-      expect(editedHobbyResponse.errors[0].message).toEqual('child "Id" fails because ["Id" must be a valid GUID]')
+      expect(editedHobbyResponse.errors[0].message).toEqual('invalid input syntax for type uuid: "dfdfddf"')
     })
   })
 
@@ -105,7 +97,7 @@ describe('Hobby Resolver', () => {
       const deleteHobbyResponse = await graphqlTestCall(deleteHobbyMutation, {
         id: 'eerere'
       })
-      expect(deleteHobbyResponse.errors[0].message).toEqual('child "Id" fails because ["Id" must be a valid GUID]')
+      expect(deleteHobbyResponse.errors[0].message).toEqual('invalid input syntax for type uuid: "eerere"')
     })
   })
 })

@@ -4308,6 +4308,12 @@ graphql-extensions@0.5.2:
   dependencies:
     "@apollographql/apollo-tools" "^0.3.3"
 
+graphql-middleware@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-middleware/-/graphql-middleware-3.0.2.tgz#c8cdb67615eec02aec237b455e679f5fc973ddc4"
+  dependencies:
+    graphql-tools "^4.0.4"
+
 graphql-subscriptions@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/graphql-subscriptions/-/graphql-subscriptions-1.0.0.tgz#475267694b3bd465af6477dbab4263a3f62702b8"
@@ -4318,7 +4324,7 @@ graphql-tag@^2.4.2, graphql-tag@^2.9.2:
   version "2.10.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.10.1.tgz#10aa41f1cd8fae5373eaf11f1f67260a3cad5e02"
 
-graphql-tools@^4.0.0:
+graphql-tools@^4.0.0, graphql-tools@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-4.0.4.tgz#ca08a63454221fdde825fe45fbd315eb2a6d566b"
   dependencies:
