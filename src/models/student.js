@@ -19,7 +19,8 @@ export default (sequelize, Sequelize) => {
     },
     photoUrl: {
       type: Sequelize.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'https://res.cloudinary.com/digpnxufx/image/upload/v1550563104/matthew_x65279.png'
     },
     hobbies: {
       type: Sequelize.ARRAY(Sequelize.UUID),

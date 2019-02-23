@@ -1,9 +1,9 @@
 import Joi from 'joi'
 
-const name = Joi.string().max(254).required().label('Name')
+const name = Joi.string().trim().min(3).max(254).required().label('Name')
 
-const firstname = Joi.string().max(254).required().label('Firstname')
-const lastname = Joi.string().max(254).required().label('Lastname')
+const firstname = Joi.string().trim().min(3).max(254).required().label('Firstname')
+const lastname = Joi.string().trim().min(3).max(254).required().label('Lastname')
 
 const birthdate = Joi.date().required().label('Birthdate')
 const photoUrl = Joi.string().uri().label('PhotoUrl')

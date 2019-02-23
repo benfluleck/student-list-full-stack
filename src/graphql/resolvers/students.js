@@ -1,8 +1,6 @@
 import { UserInputError } from 'apollo-server-core'
-import Joi from 'joi'
 
 import models from '../../models'
-import { validateStudentFields, validateId } from '../../validationSchemas'
 
 const { Student, Hobbies } = models
 
@@ -11,16 +9,15 @@ const students = {
     getAllStudents: () => Student.findAll({}),
     getStudent: async (root, { id }) => {
       try {
-        await Joi.validate(id, validateId, { abortEarly: false })
         return Student.findByPk(id)
       } catch (error) {
         throw new UserInputError('This student is not present')
       }
     }
   },
+
   Mutation: {
     addStudent: async (root, args) => {
-      await Joi.validate(args, validateStudentFields, { abortEarly: false })
       const { firstname, lastname, birthdate, photoUrl, hobbies } = args
 
       const foundHobbies = await Hobbies.count({ where: { id: { $in: hobbies } } })
@@ -43,9 +40,9 @@ const students = {
       const createdStudent = await Student.create({ ...newStudent })
       return createdStudent
     },
+
     editStudent: async (root, { id, firstname, lastname, birthdate, photoUrl, hobbies }) => {
       try {
-        await Joi.validate({ id }, validateId, { abortEarly: false })
         const student = await Student.findByPk(id)
         const foundStudent = {
           firstname: student.firstname,
@@ -69,11 +66,13 @@ const students = {
         throw new UserInputError('This student is not present')
       }
     },
+
     deleteStudent: async (root, { id }) => {
       await Student.destroy({ where: { id } })
       return id
     }
   },
+
   Student: {
     hobbies: async (student, args, context, info) => {
       const hobbies = await student.hobbies.map(hobby => Hobbies.findByPk(hobby))

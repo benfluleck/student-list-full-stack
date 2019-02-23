@@ -30,7 +30,9 @@
     ]
   },
   "jest": {
-    "setupFilesAfterEnv": [ "<rootDir>/client/src/config/tests.js" ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/client/src/config/tests.js"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     },
@@ -88,6 +90,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.9.1",
     "graphql": "^14.0.0 || ^0.12.0 || ^0.13.0",
+    "graphql-middleware": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
     "jest-styled-components": "^6.3.1",
     "joi": "^14.3.1",
