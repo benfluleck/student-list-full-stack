@@ -35,7 +35,7 @@ StudentForm.propTypes = {
   firstname: PropTypes.string,
   lastname: PropTypes.string,
   hobbies: PropTypes.arrayOf(PropTypes.string),
-  birthdate: PropTypes.string,
+  birthdate: PropTypes.number,
   errorMessage: PropTypes.shape({
     firstname: PropTypes.string,
     lastname: PropTypes.string

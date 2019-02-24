@@ -26,7 +26,8 @@ const Text = ({
   display,
   fontWeight,
   children,
-  padding
+  padding,
+  onClick
 }) => (
   <Text.Container
     fontSize={fontSize}
@@ -35,6 +36,7 @@ const Text = ({
     display={display}
     fontWeight={fontWeight}
     padding={padding}
+    onClick={onClick}
   >
     {children}
   </Text.Container>
@@ -49,7 +51,8 @@ Text.propTypes = {
   textAlign: PropTypes.oneOf(['left', 'center', 'right', 'justify']),
   uppercase: PropTypes.bool,
   fontWeight: PropTypes.oneOf(Object.keys(fontWeight)),
-  padding: PropTypes.oneOf(Object.keys(spacing))
+  padding: PropTypes.oneOf(Object.keys(spacing)),
+  onClick: PropTypes.func
 }
 
 Text.defaultProps = {
@@ -58,6 +61,10 @@ Text.defaultProps = {
 }
 
 Text.Container = styled.span`
+  ${props => {
+    const { onClick } = props
+    return onClick && 'cursor: pointer;'
+  }};
   text-align: ${props => props.textAlign};
   color: ${props => props.theme.textColors[props.color]};
   font-size: ${props => props.theme.fontSize[props.fontSize]};
